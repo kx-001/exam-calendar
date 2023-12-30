@@ -1,0 +1,55 @@
+<div id="calendar">
+    <select id="day"></select>
+    <select id="month">
+        <option value="0">January</option>
+        <option value="1">February</option>
+        <option value="2">March</option>
+        <option value="3">April</option>
+        <option value="4">May</option>
+        <option value="5">June</option>
+        <option value="6">July</option>
+        <option value="7">August</option>
+        <option value="8">September</option>
+        <option value="9">October</option>
+        <option value="10">November</option>
+        <option value="11">December</option>
+    </select>
+    <select id="year"></select>
+</div>
+
+<script>
+    function fillDays() {
+        var daySelect = document.getElementById('day');
+        var monthSelect = document.getElementById('month');
+        var yearSelect = document.getElementById('year');
+
+        daySelect.innerHTML = '';
+
+        var selectedMonth = monthSelect.value;
+        var selectedYear = yearSelect.value;
+
+        var maxDays = new Date(selectedYear, parseInt(selectedMonth) + 1, 0).getDate();
+
+        for (var i = 1; i <= maxDays; i++) {
+            var option = document.createElement('option');
+            option.value = i;
+            option.text = i;
+            daySelect.add(option);
+        }
+    }
+
+    var yearSelect = document.getElementById('year');
+    var currentYear = new Date().getFullYear();
+
+    for (var i = currentYear; i >= currentYear - 10; i--) {
+        var option = document.createElement('option');
+        option.value = i;
+        option.text = i;
+        yearSelect.add(option);
+    }
+
+    document.getElementById('month').addEventListener('change', fillDays);
+    document.getElementById('year').addEventListener('change', fillDays);
+
+    fillDays();
+</script>
